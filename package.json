@@ -2,8 +2,8 @@
   "name": "angular-chosen",
   "version": "1.0.7",
   "description": "Angular bindings for https://github.com/harvesthq/chosen",
-  "main": "./lib/chosen.js",
-  "style": "./lib/chosen.css",
+  "main": "./lib/chosen.min.js",
+  "style": "./lib/chosen.min.css",
   "directories": {
     "example": "example"
   },

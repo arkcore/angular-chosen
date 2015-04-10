@@ -1,6 +1,6 @@
-angular.module('localytics.directives', [])
+module.exports = angular.module('angular-chosen', [])
 
-angular.module('localytics.directives').directive 'chosen', ->
+angular.module('angular-chosen').directive 'chosen', ['$timeout', ($timeout) ->
 
   # This is stolen from Angular...
   NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/
@@ -36,7 +36,7 @@ angular.module('localytics.directives').directive 'chosen', ->
   terminal: true
   link: (scope, element, attr, ngModel) ->
 
-    element.addClass('localytics-chosen')
+    element.addClass('angular-chosen')
 
     # Take a hash of options from the chosen directive
     options = scope.$eval(attr.chosen) or {}
@@ -95,11 +95,16 @@ angular.module('localytics.directives').directive 'chosen', ->
       valuesExpr = match[7]
 
       scope.$watchCollection valuesExpr, (newVal, oldVal) ->
-        # There's no way to tell if the collection is a promise since $parse hides this from us, so just
-        # assume it is a promise if undefined, and show the loader
-        if angular.isUndefined(newVal)
-          startLoading()
-        else
-          removeEmptyMessage() if empty
-          stopLoading()
-          disableWithMessage() if isEmpty(newVal)
+        # Defer execution until DOM is loaded
+        timer = $timeout(->
+          if angular.isUndefined(newVal)
+            startLoading()
+          else
+            removeEmptyMessage() if empty
+            stopLoading()
+            disableWithMessage() if isEmpty(newVal)
+        )
+
+      scope.$on '$destroy', (event) ->
+        $timeout.cancel timer if timer?
+]

@@ -6,12 +6,15 @@ AngularJS Chosen directive
 This directive brings the [Chosen](http://harvesthq.github.com/chosen/) jQuery plugin
 into AngularJS with ngModel and ngOptions integration.
 
-To use, include "localytics.directives" as a dependency in your Angular module.  You can now
+To use, include "angular-chosen" as a dependency in your Angular module.  You can now
 use the "chosen" directive as an attribute on any select element.  Angular version 1.2+ is required.
 
 # Installation
 
-    $ bower install angular-chosen-localytics --save
+    $ `npm install angular-chosen -S`
+
+## Yeoman or Bower install
+If you use Yeoman or Bower install, you need to rename the `chosen.jquery.js` or the `chosen.proto.js` to `chosen.js`. Otherwise Chosen won't be included in your `index.html`.
 
 # Features
   * Works with `ngModel` and `ngOptions`

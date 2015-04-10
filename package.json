@@ -1,9 +1,9 @@
 {
   "name": "angular-chosen",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Angular bindings for https://github.com/harvesthq/chosen",
-  "main": "./dist/chosen.min.js",
-  "style": "./dist/chosen.min.css",
+  "main": "./src/chosen.coffee",
+  "style": "./src/chosen-spinner.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production gulp build"
@@ -36,5 +36,10 @@
     "imagemin-gifsicle": "^4.1.0",
     "minifyify": "^6.4.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "browserify": {
+    "transform": [
+      "coffeeify"
+    ]
   }
 }

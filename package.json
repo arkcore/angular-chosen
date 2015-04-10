@@ -2,11 +2,8 @@
   "name": "angular-chosen",
   "version": "1.0.7",
   "description": "Angular bindings for https://github.com/harvesthq/chosen",
-  "main": "./lib/chosen.min.js",
-  "style": "./lib/chosen.min.css",
-  "directories": {
-    "example": "example"
-  },
+  "main": "./dist/chosen.min.js",
+  "style": "./dist/chosen.min.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production gulp build"

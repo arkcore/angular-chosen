@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     rename = require('gulp-rename'),
     minifyCSS = require('gulp-minify-css'),
-    imagemin = require('gulp-imagemin');
+    imagemin = require('gulp-imagemin'),
+    guif = require('gulp-if');
 
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -32,8 +33,8 @@ gulp.task('js-bindings', function () {
 
 gulp.task('css-bindings', function () {
     return gulp.src('./src/*.css')
-              .pipe(minifyCSS())
-              .pipe(rename('chose.min.css'))
+              .pipe(guif(isProduction, minifyCSS()))
+              .pipe(rename(isProduction ? 'chose.min.css' : 'chosen.css'))
               .pipe(gulp.dest('./dist'));
 });
 
